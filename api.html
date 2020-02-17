@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch An API</title>
+</head>
+<body>
+
+    <button type="button" id="getData">GET DATA</button>
+    
+    <button type="button" id="getAPI">GET API</button>
+
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('getData').addEventListener('click', getData);
+
+        //document.getElementById('getAPI').addEventListener('click',getAPI);
+
+
+        function getData(){
+            fetch('samplelocal.json')
+                .then(response => { return response.json() })
+                .then((data) => {
+                    let result = `<h2> Random User Info From PlaceHolder API</h2>`;
+                    data.forEach((user) => {
+                        const {id, name, email} = user
+                        result += 
+                        `<div>
+                        <h5>User ID: ${id}</h5>
+                            <ul class="w3-ul">
+                                <li>User Full Name: ${name}</li>
+                                <li>User Email: ${email}</li>
+                            </ul>
+                        </div>`;
+                    });
+                    document.getElementById('result').innerHTML=result;
+                });
+        }
+    </script>
+</body>
+</html>
